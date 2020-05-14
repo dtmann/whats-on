@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>WhatsOn - Homepage</title>
+  {% load static %}
+  <!-- Bootstrap core CSS -->
+  <link href="{% static "style.css" %}" rel="stylesheet">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <img class="socials" width="25" src="{% static "" %}facebook.png" alt="">
+      <img class="socials" width="25" src="{% static "" %}instagram.png" alt="">
+      <img class="socials" width="25" src="{% static "" %}twitter.png" alt="">
+      <img class="socials" width="25" src="{% static "" %}telegram.png" alt="">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+          {% if user.is_authenticated %}
+            <li class="nav-item""><a class="nav-link" href="">|</a></li>
+            <li class="nav-item"><a class="nav-link" href="/view_local">WhatsOn</a></li>
+            <li class="nav-item"><a class="nav-link" href="/new_business">(Post My Venue)</a></li>
+            <li class="nav-item"><a class="nav-link" href="/user">{{user.username}}</a></li>
+            <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+            <li class="nav-item"><a class="nav-link" href="/admin">Admin Panel</a></li>
+          {% else %}
+            <li class="nav-item""><a class="nav-link" href="">|</a></li>
+            <li class="nav-item""><a class="nav-link" href="/register">Register</a></li>
+            <li class="nav-item""><a class="nav-link" href="/login">Login</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="bg-primary py-5 mb-5">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center">
+        <div class="col-lg-12">
+          <h1 class="display-4 text-white mt-5 mb-2">WhatsOn</h1>
+        </div>
+      </div>
+    </div>
+  </header>
+  {% block content %}
+  {% endblock %}

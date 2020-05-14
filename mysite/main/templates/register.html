@@ -1,0 +1,14 @@
+{% extends "header.html" %}
+{% load bootstrap %}
+
+{% block content %}
+<div class="container">
+	<form method="POST" class="form-group" action="">
+        {% csrf_token %}
+        {{form|bootstrap}}
+        <button class="btn btn-primary mb-2" type="submit">Register</button>
+    </form>
+    If you already have an account <a href="/login" target="blank"><strong>login</strong></a> instead.
+</div>
+{% include "footer.html" %}
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "header.html" %}
+{% block content %}
+{% load static %}
+
+<div class="container">
+	<h2>Check out these mean places</h2>
+	<br>
+	
+	<div class="row text-center">	
+	{% for b in business %}
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <img class="card-img-top" src="{% static "" %}{{b.image_url}}" alt="">
+          <div class="card-body">
+            <h4 class="card-title">{{b.name}}</h4>
+            <p class="card-text">Food/Drink: {{b.mondays_food}}</p>
+            <p class="card-text">Entertainment: {{b.mondays_entertainment}}</p>
+            <p class="card-text">Other: {{b.mondays_other}}</p>
+            <p class="card-text">Id: {{b.id}}</p>
+            <p class="card-text">Distance: {{b.distance}}km</p>
+          </div>
+          <div class="card-footer">
+          	<form action="view_details" method="GET">
+          		<input type="hidden" name="idnumber" value="{{b.id}}">
+            	<input type="submit" class="btn btn-primary" value="{{b.id}}">
+        	</form>
+          </div>
+        </div>
+      </div>
+{% endfor %}
+{% include "footer.html" %}
+{% endblock %}

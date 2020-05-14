@@ -1,0 +1,14 @@
+{% extends "header.html" %}
+{% load bootstrap %}
+{% block content %}
+<div class="container">
+	<form method="POST" action="/new_business">
+        {% csrf_token %}
+        {{form|bootstrap}}
+        <button class="btn btn-primary mb-2" type="submit">Register</button>
+    </form>
+
+    Dont have an account? <a href="\register" target="blank"><strong>Register</strong></a> now.
+</div>
+{% include "footer.html" %}
+{% endblock %}
