@@ -2,10 +2,10 @@
 {% load bootstrap %}
 {% block content %}
 <div class="container">
-	<form method="POST" action="/new_business">
+	<form method="POST" action="/login">
         {% csrf_token %}
         {{form|bootstrap}}
-        <button class="btn btn-primary mb-2" type="submit">Register</button>
+        <button class="btn btn-primary mb-2" type="submit">Login</button>
     </form>
 
     Dont have an account? <a href="\register" target="blank"><strong>Register</strong></a> now.

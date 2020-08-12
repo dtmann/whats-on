@@ -11,7 +11,6 @@ import json
 from .serializers import BusinessSerializer
 from rest_framework import viewsets
 from .maps import *
-import pprint as pp
 
 def homepage(request):
     return render(request = request, template_name='home.html')
@@ -60,20 +59,19 @@ def view_local(request):
         i.distance = get_distance((i.lat, i.long), (0,0))
         data.append(i)
 
+
     # VERY DOGILY SORT BY LOCATION
-    distance_data = {}
-    t = 1
-    for a in b:
-        distance_data = {
-            "key":t,
-            "distance":a.distance
-        }
-        t=t+1
-
-    print(distance_data.get("key"))
-    
-
-
+    i = 1
+    while i in range(1, len(data)):
+        x2 = data[i].distance
+        x1 = data[i-1].distance
+        if x1 > x2:
+            tmp = data[i-1]
+            data[i-1] = data[i]
+            data[i] = tmp
+            print('yo')  
+        i = i + 1
+        
     return render(request = request,
                   template_name='view_local.html',
                   context = {"business": data})
@@ -145,10 +143,9 @@ def logout_request(request):
     logout(request)
     messages.success(request, "Logged out :)")
     return redirect("main:homepage")
-
+    
 def login_request(request):
     if request.method == 'POST':
-        print('test')
         form = AuthenticationForm(request=request, data=request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
@@ -156,7 +153,7 @@ def login_request(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                messages.success(request, f"You are now logged in as {username}")
+                messages.info(request, f"You are now logged in as {username}")
                 return redirect('/')
             else:
                 messages.error(request, "Invalid username or password.")
@@ -166,7 +163,6 @@ def login_request(request):
     return render(request = request,
                     template_name = "login.html",
                     context={"form":form})
-    
 
 def update_coordinates(request):
     temp_set_coordinates()
