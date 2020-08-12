@@ -49,6 +49,12 @@ class UserData(models.Model):
 
     def get_lat(self):
         return self.lat
+
+    def set_lat(self, l):
+        self.lat = l
     
     def get_long(self):
         return self.long
+    
+    def set_long(self, l):
+        self.long = l

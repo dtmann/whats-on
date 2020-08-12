@@ -4,7 +4,7 @@ from .models import Business, UserData
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
-from .forms import NewUserForm, NewBusinessForm, BusinessForm
+from .forms import NewUserForm, NewBusinessForm, BusinessForm, CordinatesForm
 import datetime
 import requests
 import json
@@ -202,4 +202,12 @@ def update_coordinates(request):
 
 def update_address(request):
     #Updates the address of a user account
-    pass
+    if request.user.is_authenticated:
+        lat = float(request.POST.get("lat", ""))
+        long = float(request.POST.get("long", ""))
+        u = UserData.objects.filter(user=request.user)
+        u = u[0]
+        u.lat = lat
+        u.long = long
+        u.save()
+        return redirect('/view_local')

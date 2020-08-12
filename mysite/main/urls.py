@@ -36,6 +36,7 @@ urlpatterns = [
     #path("api-auth/", include('rest_framework.urls', namespace='rest_framework'))
     path("new_business/", views.new_business, name="new_business"),
     path("user/", views.user, name="user.html"),
+    path("update_address", views.update_address, name="update_address"),
     path('api', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

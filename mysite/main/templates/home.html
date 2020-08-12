@@ -9,11 +9,11 @@
     <body>
         {% if user.is_authenticated %}
         <p>Pelase update your address below:</p>
-        <form method="POST">{% csrf_token %}
+        <form action="/update_address" method="POST">{% csrf_token %}
         <div id='searchBoxContainer'><input type= 'text' id= 'searchBox'/>
         <div id='printoutPanel'></div>
-        <input type= 'text' id='lat' style="display:none" />
-        <input type= 'text' id='long' style="display:none" />
+        <input type= 'text' id='lat' name='lat' style="display:none" />
+        <input type= 'text' id='long' name='long' style="display:none" />
         </div>
         <input type= 'submit' id='submit-btn' style="display:none" value="Update Address"/>
         </form>

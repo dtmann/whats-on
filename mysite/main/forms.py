@@ -65,3 +65,7 @@ class BusinessForm(ModelForm):
 #         widgets = {
 #                 'event_date': forms.DateInput(attrs={'id': 'datetimepicker12'}),
 #         }
+
+class CordinatesForm(forms.Form):
+    lat = forms.FloatField()
+    long = forms.FloatField()
