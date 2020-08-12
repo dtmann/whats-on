@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 
 class Business(models.Model):
@@ -41,3 +41,14 @@ class Business(models.Model):
             'other':mondays_other
         }
         return monday_data
+
+class UserData(models.Model):
+    user = models.OneToOneField(User,related_name='UserData', on_delete=models.CASCADE)
+    lat = models.FloatField()
+    long = models.FloatField()
+
+    def get_lat(self):
+        return self.lat
+    
+    def get_long(self):
+        return self.long

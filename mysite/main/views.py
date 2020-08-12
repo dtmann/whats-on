@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Business
+from .models import Business, UserData
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
@@ -49,32 +49,37 @@ class BusinessViewSet(viewsets.ModelViewSet):
 
 
 def view_local(request):
-    b = Business.objects.all()
+    if request.user.is_authenticated:
+        user = request.user
+        b = Business.objects.all()
 
-    data = []
-    # hack around for image names
-    for i in b:
-        x = str(i.b_image).replace('main/static/', '')
-        i.image_url = x
-        i.distance = get_distance((i.lat, i.long), (0,0))
-        data.append(i)
+        data = []
+        # hack around for image names
+        for i in b:
+            x = str(i.b_image).replace('main/static/', '')
+            i.image_url = x
+            print(user)
+            i.distance = get_distance((i.lat, i.long), (user.UserData.lat, user.UserData.long))
+            print(user.UserData.lat, user.UserData.long)
+            data.append(i)
 
 
-    # VERY DOGILY SORT BY LOCATION
-    i = 1
-    while i in range(1, len(data)):
-        x2 = data[i].distance
-        x1 = data[i-1].distance
-        if x1 > x2:
-            tmp = data[i-1]
-            data[i-1] = data[i]
-            data[i] = tmp
-            print('yo')  
-        i = i + 1
-        
-    return render(request = request,
-                  template_name='view_local.html',
-                  context = {"business": data})
+        # VERY DOGILY SORT BY LOCATION
+        i = 1
+        while i in range(1, len(data)):
+            x2 = data[i].distance
+            x1 = data[i-1].distance
+            if x1 > x2:
+                tmp = data[i-1]
+                data[i-1] = data[i]
+                data[i] = tmp
+                print('yo')  
+            i = i + 1
+            
+        return render(request = request,
+                    template_name='view_local.html',
+                    context = {"business": data})
+    return redirect('')
 
 def user(request):
     if request.user.is_authenticated:
@@ -186,10 +191,15 @@ def update_coordinates(request):
 #                     template_name = "main/addevent.html",
 #                     context={"form":form})
 
-# def userpage(request):
+# def userpage(requeast):
 #     if request.user is not None:
 #         e = Event.objects.filter(event_hostname=request.user.username)
 #         count = e.count()
 #         return render(request = request,
 #                     template_name = "main/user.html",
 #                     context={"username":request.user.username, "events":e, "count":count})
+
+
+def update_address(request):
+    #Updates the address of a user account
+    pass

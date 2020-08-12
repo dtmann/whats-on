@@ -1,0 +1,10 @@
+input#searchBox {
+    width: 45%;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 1%;
+}
+
+#printoutPanel {
+    margin-bottom: 1%;
+}

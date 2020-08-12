@@ -8,7 +8,7 @@ from .models import Business
 
 
 # GET API KEY FOR MAPS
-api_key = ""
+api_key = "Ag8-hbsxZdHNXVz4vYDRoETbbv1sU85mLyKLmIOhB0f7GqSJQNtjriQeSbQk2tqU"
 
 api_url = "http://dev.virtualearth.net/REST/v1/Locations?countryRegion={countryRegion}&adminDistrict={adminDistrict}&locality={locality}&postalCode={postalCode}&addressLine={addressLine}&userLocation={userLocation}&userIp={userIp}&usermapView={usermapView}&includeNeighborhood={includeNeighborhood}&maxResults={maxResults}&key={BingMapsKey}"
 
@@ -29,13 +29,13 @@ def get_coordinates(address, post_code):
 
 def get_distance(place_one, place_two):
     # Temporary coord
-    place_two = [-27.84215, 153.28636]
+    #place_two = [-27.84215, 153.28636]
 
     c1 = (place_one[0], place_one[1])
     c2 = (place_two[0], place_two[1])
     distance = geopy.distance.vincenty(c1, c2).km
     d = round(distance, ndigits=1)
-    print(d)
+    print(place_two)
     return d
 
 # TESTING

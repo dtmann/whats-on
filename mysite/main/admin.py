@@ -5,5 +5,6 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Business
+from .models import Business, UserData
 admin.site.register(Business)
+admin.site.register(UserData)
