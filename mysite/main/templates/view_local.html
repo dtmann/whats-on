@@ -1,11 +1,47 @@
 {% extends "header.html" %}
 {% block content %}
 {% load static %}
+<head>
+    <meta charset="utf-8" />
+	<script type='text/javascript'>
+    function GetMap() {
+        var map = new Microsoft.Maps.Map('#myMap', {
+            credentials: 'Ag8-hbsxZdHNXVz4vYDRoETbbv1sU85mLyKLmIOhB0f7GqSJQNtjriQeSbQk2tqU',
+            center: new Microsoft.Maps.Location({{user_location.0}}, {{user_location.1}})
+        });
 
+        var center = map.getCenter();
+
+        //Create custom Pushpin
+        {%for b in map_data%}
+          var loc = new Microsoft.Maps.Location({{b.lat}}, {{b.long}})
+          var pin = new Microsoft.Maps.Pushpin(loc, {
+              title: "{{b.name}}",
+              text: "{{b.id}}"
+              
+          });
+          map.entities.push(pin);
+        {% endfor %}
+        
+    }
+    function hideShowMap(){
+      var myMap = document.getElementById("myMap");
+      console.log(myMap.style)
+      if (myMap.style.display === "none"){
+        myMap.style.display = "block"
+      }else{
+        myMap.style.display = "none"
+      }
+    }
+    </script>
+    <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+</head>
 <div class="container">
 	<h2>Check out these mean places</h2>
 	<br>
-	
+	<div id="myMap" style="position:relative;width:600px;height:400px;"></div>
+  <div id="hideShowMap"><button class="btn btn-secondary" onclick="hideShowMap()">Hide/Show Map</button></div>
+  
 	<div class="row text-center">	
 	{% for b in business %}
       <div class="col-lg-3 col-md-6 mb-4">

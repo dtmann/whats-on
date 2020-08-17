@@ -8,3 +8,8 @@ input#searchBox {
 #printoutPanel {
     margin-bottom: 1%;
 }
+
+#myMap {
+    margin-bottom: 30px;
+    border: solid 1px black;
+}

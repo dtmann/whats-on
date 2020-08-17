@@ -44,6 +44,7 @@ class Business(models.Model):
 
 class UserData(models.Model):
     user = models.OneToOneField(User,related_name='UserData', on_delete=models.CASCADE)
+    address = models.TextField()
     lat = models.FloatField()
     long = models.FloatField()
 

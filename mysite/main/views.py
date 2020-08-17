@@ -73,12 +73,22 @@ def view_local(request):
                 tmp = data[i-1]
                 data[i-1] = data[i]
                 data[i] = tmp
-                print('yo')  
+                #print('yo')  
             i = i + 1
-            
+
+        # Get Businesses in Range, and get map data
+        BiR = return_local_data(request)
+        map_data = get_local_data_coordinates(BiR)
+
+        # Get user location
+        user_location = get_user_location(request)
+
+        print("MapData: " + str(map_data))    
         return render(request = request,
                     template_name='view_local.html',
-                    context = {"business": data})
+                    context = {"business": data,
+                                "map_data": BiR,
+                                "user_location":user_location})
     return redirect('')
 
 def user(request):
@@ -211,3 +221,50 @@ def update_address(request):
         u.long = long
         u.save()
         return redirect('/view_local')
+
+def get_user_model(request):
+    # Returns the user Model
+    if request.user.is_authenticated:
+        u = UserData.objects.filter(user=request.user)
+        if len(u) > 0:
+            u = u[0]
+            return u
+
+def get_user_location(request):
+    # Returns the users latitude and longitude as a tuple
+    userModel = get_user_model(request)
+    if userModel:
+        return (userModel.lat, userModel.long)
+    else:
+        return None
+
+def return_local_data(request, d=50):
+    # Return the coordinates of nearby venues
+    # d: The distance in KMs from the user
+    location = get_user_location(request)
+    if location:
+        b = Business.objects.all()
+        business_in_range = []
+        for business in b:
+            print(business.name)
+            cordinates = [business.lat, business.long]
+            distance = get_distance(cordinates, location)
+            print(distance)
+            if distance < d:
+                business_in_range.append(business)
+        return business_in_range
+
+def get_local_data_coordinates(business_list):
+    # Returns the data for an interactive map
+    data = []
+    std = ['Lat', 'Long', 'Name']
+    #Append header row
+    data.append(std)
+
+    for business in business_list:
+        d = [business.lat,
+            business.long,
+            business.name]
+        data.append(d)
+    
+    return data

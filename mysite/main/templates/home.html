@@ -18,35 +18,7 @@
         <input type= 'submit' id='submit-btn' style="display:none" value="Update Address"/>
         </form>
         
-        <div id='myMap' style='width: 100vw; height: 100vh;'></div>
-        <script type='text/javascript'>
-            function loadMapScenario() {
-                Microsoft.Maps.loadModule('Microsoft.Maps.AutoSuggest', {
-                    callback: onLoad,
-                    errorCallback: onError
-                });
-                function onLoad() {
-                    var options = { maxResults: 5 };
-                    var manager = new Microsoft.Maps.AutosuggestManager(options);
-                    manager.attachAutosuggest('#searchBox', '#searchBoxContainer', selectedSuggestion);
-                }
-                function onError(message) {
-                    document.getElementById('printoutPanel').innerHTML = message;
-                }
-                function selectedSuggestion(suggestionResult) {
-                    document.getElementById('printoutPanel').innerHTML =
-                        'Suggestion: ' + suggestionResult.formattedSuggestion +
-                            '<br> Lat: ' + suggestionResult.location.latitude +
-                            '<br> Lon: ' + suggestionResult.location.longitude;
-                    document.getElementById('lat').value =  suggestionResult.location.latitude;
-                    document.getElementById('long').value =  suggestionResult.location.longitude;
-                    document.getElementById('submit-btn').style.display = "block";  
-                }
-                
-            }
-        </script>
-        <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key=Ag8-hbsxZdHNXVz4vYDRoETbbv1sU85mLyKLmIOhB0f7GqSJQNtjriQeSbQk2tqU&callback=loadMapScenario' async defer></script>
-    </body>
+    
     {% endif %}
 {% include "footer.html" %}
 {% endblock %}
