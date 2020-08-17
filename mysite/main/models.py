@@ -59,3 +59,20 @@ class UserData(models.Model):
     
     def set_long(self, l):
         self.long = l
+
+class SpecialEvent(models.Model):
+    business = models.ForeignKey(Business, on_delete=models.CASCADE)
+    name  = models.CharField(max_length=200)
+    datetime = models.DateTimeField()
+    description = models.TextField()
+    e_image = models.ImageField(upload_to='main/static', blank=True)
+    tags = models.TextField(null=True)
+    updated_at = models.DateTimeField(blank=True)
+
+    def __str__(self):
+        return str(self.business.name) + "-" + str(self.name) + "-" + str(self.id)
+
+    def get_event_name(self):
+        return self.name
+
+

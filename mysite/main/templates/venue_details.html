@@ -4,17 +4,64 @@
 
 	<div class="container">
 	test
-	<div class="row text-center">	
-	{{venue.id}}
-	{{venue.name}}
-	{{venue.phone_number}}
-	{{venue.address}}
-	{{venue.facebook_url}}
-	{{venue.opening_hours}}
-	{{venue.mondays_food}}
-	{{venue.b_image}}
+	<div id="MoreDetails" class="row text-left">
+	<table>
+	<tr>
+		<td></td>
+		<td>{{venue.id}}</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>{{venue.name}}</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>{{venue.phone_number}}</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>{{venue.address}}</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>{{venue.facebook_url}}</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>{{venue.opening_hours}}</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>{{venue.mondays_food}}</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>{{venue.b_image}}</td>
+	</tr>
+	</table>	
 	</div>
 
+	{% if events %}
+	<div id="events-render">
+	<table>
+	<tr>
+		<th>Name</th>
+		<th>Date & Time</th>
+		<th>Description</th>
+		<th>tags</th>
+	</tr>
+	{% for event in events %}
+		<tr>
+			<td width="15%">{{event.name}}</td>
+			<td width="20%">{{event.datetime}}</td>
+			<td width="40%">{{event.description}}</td>
+			<td width="10%">{{event.tags}}</td>
+			<td><button id="attend-event" class="btn btn-success">Attend Event</button></td>
+		</tr>
 
+	{% endfor %}
+	</table>
+	</div>
+	{% endif %}
 {% include "footer.html" %}
 {% endblock %}

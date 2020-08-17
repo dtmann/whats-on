@@ -55,3 +55,8 @@ div#feed-container {
     margin-top: 0px;
     margin-bottom: auto;
 }
+
+#events-render {
+    margin-top: 2%;
+    margin-bottom: 2%;
+}

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Business, UserData
+from .models import Business, UserData, SpecialEvent
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
@@ -113,10 +113,12 @@ def venue_details(request):
         r = request.GET.get('idnumber')
         r = int(r)
         o = Business.objects.get(id=r)
+        events = get_events(r)
         #return HttpResponse(o.name)
         return render(request = request,
             template_name='venue_details.html',
-            context = {"venue": o})
+            context = {"venue": o,
+                        'events':events})
 
 def new_business(request):
     # if this is a POST request we need to process the form data
@@ -267,3 +269,8 @@ def get_local_data_coordinates(business_list):
             business.name]
         data.append(d)
     return data
+
+def get_events(business_id):
+    # Gets events based on a business id
+    b = SpecialEvent.objects.filter(business_id=business_id)
+    return b

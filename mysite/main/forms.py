@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.forms import widgets, DateTimeField, DateField, DateInput
 from django.forms import ModelForm
 from . import models
-from .models import Business
+from .models import Business, SpecialEvent
 
 class NewUserForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -69,3 +69,8 @@ class BusinessForm(ModelForm):
 class CordinatesForm(forms.Form):
     lat = forms.FloatField()
     long = forms.FloatField()
+
+class SpecialEventForm(ModelForm):
+    class Meta:
+        model = models.SpecialEvent
+        fields = ['business', 'name', 'datetime', 'description', 'e_image','tags']
