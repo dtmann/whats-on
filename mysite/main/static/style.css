@@ -11,5 +11,47 @@ input#searchBox {
 
 #myMap {
     margin-bottom: 30px;
-    border: solid 1px black;
+    box-shadow: 5px 5px 5px grey;
+}
+
+.card.h-100 {
+    box-shadow: 2px 2px 10px grey;
+}
+
+.row.text-center {
+    background-color: #605959;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin-bottom: 50px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px grey;
+}
+
+#map-container {
+    background-color: #605959;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin-bottom: 50px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px grey;
+    width: 60%;
+    display:inline-block;
+}
+
+button.btn.btn-secondary {
+    margin-left: 10%;
+}
+
+div#feed-container {
+    background-color: #605959;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin-bottom: 50px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px grey;
+    display: inline-block;
+    margin-left: 5%;
+    width: 34%;
+    margin-top: 0px;
+    margin-bottom: auto;
 }

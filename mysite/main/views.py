@@ -83,13 +83,13 @@ def view_local(request):
         # Get user location
         user_location = get_user_location(request)
 
-        print("MapData: " + str(map_data))    
+        #print("MapData: " + str(map_data))    
         return render(request = request,
                     template_name='view_local.html',
                     context = {"business": data,
                                 "map_data": BiR,
                                 "user_location":user_location})
-    return redirect('')
+    return HttpResponseRedirect("/login")
 
 def user(request):
     if request.user.is_authenticated:
@@ -157,7 +157,7 @@ def register(request):
 def logout_request(request):
     logout(request)
     messages.success(request, "Logged out :)")
-    return redirect("main:homepage")
+    return homepage(request)
     
 def login_request(request):
     if request.method == 'POST':
@@ -246,10 +246,10 @@ def return_local_data(request, d=50):
         b = Business.objects.all()
         business_in_range = []
         for business in b:
-            print(business.name)
+            #print(business.name)
             cordinates = [business.lat, business.long]
             distance = get_distance(cordinates, location)
-            print(distance)
+            #print(distance)
             if distance < d:
                 business_in_range.append(business)
         return business_in_range
@@ -266,5 +266,4 @@ def get_local_data_coordinates(business_list):
             business.long,
             business.name]
         data.append(d)
-    
     return data

@@ -3,22 +3,6 @@
 <div class="container">
 <h1>Content goes here</h1>
 <head>
-<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
-        <style type='text/css'>body{margin:0;padding:0;overflow:hidden;font-family:'Segoe UI',Helvetica,Arial,Sans-Serif}</style>
-    </head>
-    <body>
-        {% if user.is_authenticated %}
-        <p>Pelase update your address below:</p>
-        <form action="/update_address" method="POST">{% csrf_token %}
-        <div id='searchBoxContainer'><input type= 'text' id= 'searchBox'/>
-        <div id='printoutPanel'></div>
-        <input type= 'text' id='lat' name='lat' style="display:none" />
-        <input type= 'text' id='long' name='long' style="display:none" />
-        </div>
-        <input type= 'submit' id='submit-btn' style="display:none" value="Update Address"/>
-        </form>
-        
-    
-    {% endif %}
+
 {% include "footer.html" %}
 {% endblock %}
